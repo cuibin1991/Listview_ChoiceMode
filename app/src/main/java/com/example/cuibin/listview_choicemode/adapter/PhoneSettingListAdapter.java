@@ -43,10 +43,6 @@ public class PhoneSettingListAdapter extends BaseAdapter {
         return list.get(position);
     }
 
-    public void setSelectedPosition(int position) {
-        selectedPosition = position;
-    }
-
     @Override
     public long getItemId(int position) {
         return position;
@@ -66,22 +62,19 @@ public class PhoneSettingListAdapter extends BaseAdapter {
         }
         String content = list.get(position);
         holder.tv.setText(content);
+        //缓存的选中位置
         int CurrentPosition = Integer.parseInt(getCurrentPosition());
+        //当前位置是选中位置
         if (CurrentPosition == position) {
             convertView.setSelected(true);
             convertView.setPressed(true);
             holder.iv.setImageResource(R.drawable.ic_single_check);
         }
+        //当前不是选中位置
         else {
-            if (selectedPosition == position) {
-                convertView.setSelected(true);
-                convertView.setPressed(true);
-                holder.iv.setImageResource(R.drawable.ic_single_check);
-            } else {
-                convertView.setSelected(false);
-                convertView.setPressed(false);
-                holder.iv.setImageResource(R.drawable.ic_single_empty);
-            }
+            convertView.setSelected(false);
+            convertView.setPressed(false);
+            holder.iv.setImageResource(R.drawable.ic_single_empty);
         }
         return convertView;
     }
